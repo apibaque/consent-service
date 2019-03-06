@@ -1,6 +1,7 @@
 package cl.redbanc.payment.service;
 
 import java.math.BigDecimal;
+import java.util.Date;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -49,9 +50,11 @@ public class PaymentServiceImpl implements PaymentService {
 		CreditorAccount creditorAccount = new CreditorAccount(payment.getCreditorAccount().getIdentification(), payment.getCreditorAccount().getName(), payment.getCreditorAccount().getDestinationDNI());
 		DebtorAccount debtorAccount = new DebtorAccount(payment.getDebtorAccount().getIdentification(), payment.getDebtorAccount().getName(), payment.getDebtorAccount().getDestinationDNI());
 		InstructedAmount instructedAmount = new InstructedAmount(payment.getInstructedAmount().getAmount(), payment.getInstructedAmount().getCurrency());
-		Payment entity = new Payment(payment.getId(), payment.getStatus().toString(), debtorAccount, creditorAccount, instructedAmount);
+		Payment entity = new Payment(payment.getId().toString(), payment.getTransactionId().toString(),payment.getStatus().toString(), 
+				payment.getCreatedDate(), payment.getModifyDate(),
+				debtorAccount, creditorAccount,instructedAmount);
 		
-	
+		
 		paymentRepository.save(entity);
 		
 		return new PaymentDTO().build(entity);
