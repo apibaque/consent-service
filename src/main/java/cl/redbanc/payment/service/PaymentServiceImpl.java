@@ -1,12 +1,15 @@
 package cl.redbanc.payment.service;
 
+import java.math.BigDecimal;
 import java.util.Objects;
 import java.util.Optional;
 
 import javax.persistence.EntityNotFoundException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import cl.redbanc.payment.api.model.PaymentDTO;
 import cl.redbanc.payment.model.CreditorAccount;
@@ -20,6 +23,7 @@ public class PaymentServiceImpl implements PaymentService {
 
 	@Autowired
 	private PaymentRepository paymentRepository;
+	
 
 	private Payment findOne(String id) {
 		Optional<Payment> entity = paymentRepository.findById(id);
@@ -31,8 +35,13 @@ public class PaymentServiceImpl implements PaymentService {
 	
 	@Override
 	public PaymentDTO getPayment(String id) {
-		Payment entity = findOne(id);
-		return new PaymentDTO().build(entity);
+		 try {
+			 Payment entity = findOne(id);				
+			 return new PaymentDTO().build(entity);
+		 }catch(Exception e) {
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Payment Not Found", e);
+		 }
+		
 	}
 
 	@Override
@@ -42,6 +51,7 @@ public class PaymentServiceImpl implements PaymentService {
 		InstructedAmount instructedAmount = new InstructedAmount(payment.getInstructedAmount().getAmount(), payment.getInstructedAmount().getCurrency());
 		Payment entity = new Payment(payment.getId(), payment.getStatus().toString(), debtorAccount, creditorAccount, instructedAmount);
 		
+	
 		paymentRepository.save(entity);
 		
 		return new PaymentDTO().build(entity);
