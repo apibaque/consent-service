@@ -84,12 +84,14 @@ public class PaymentDTO {
 
 	public PaymentDTO build(Payment payment) {
 		this.setId(payment.getId());
+		this.setCreatedDate(payment.getCretedDate());
+		this.setModifyDate(payment.getModifyDate());
 		this.setCreditorAccount(new CreditorAccountDTO().build(payment.getCreditorAccount()));
 		this.setDebtorAccount(new DebtorAccountDTO().build(payment.getDebtorAccount()));
 		this.setInstructedAmount(new InstructedAmountDTO().build(payment.getInstructedAmount()));
-		
 		StatusEnum status = StatusEnum.fromValue(payment.getStatus());
 		this.setStatus(status);
+		this.setTransactionId(payment.getTransactionId());
 		
 		return this;
 	}
