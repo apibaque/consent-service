@@ -63,6 +63,8 @@ public class PaymentServiceImpl implements PaymentService {
 
 		Payment entity = this.findOne(payment.getId());
 		entity.setStatus(payment.getStatus().toString());
+		entity.setModifyDate(payment.getModifyDate());
+		entity.setTransactionId(payment.getTransactionId());
 		
 		paymentRepository.save(entity);
 		
