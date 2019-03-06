@@ -1,5 +1,7 @@
 package cl.redbanc.payment.model;
 
+import java.util.Date;
+
 import javax.validation.constraints.NotEmpty;
 
 import org.springframework.data.annotation.Id;
@@ -15,8 +17,15 @@ public class Payment {
 	@Id
 	private String id;
 
+	@Field("transactionId")
+	private String transactionId;
+
 	@Field("status")
 	private String status;
+
+	private Date cretedDate;
+
+	private Date modifyDate;
 
 	@NotEmpty(message = "debtorAccount can not be empty")
 	private DebtorAccount debtorAccount = null;
@@ -28,31 +37,21 @@ public class Payment {
 	private InstructedAmount instructedAmount = null;
 
 	@PersistenceConstructor
-	public Payment(String id, String status, DebtorAccount debtorAccount, CreditorAccount creditorAccount,
+	public Payment(String status, DebtorAccount debtorAccount, CreditorAccount creditorAccount,
 			InstructedAmount instructedAmount) {
 		super();
-		this.id = id;
 		this.status = status;
 		this.debtorAccount = debtorAccount;
 		this.creditorAccount = creditorAccount;
 		this.instructedAmount = instructedAmount;
 	}
 
-	@Override
-	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("Payment [id=");
-		builder.append(id);
-		builder.append(", status=");
-		builder.append(status);
-		builder.append(", debtorAccount=");
-		builder.append(debtorAccount);
-		builder.append(", creditorAccount=");
-		builder.append(creditorAccount);
-		builder.append(", instructedAmount=");
-		builder.append(instructedAmount);
-		builder.append("]");
-		return builder.toString();
+	public String getTransactionId() {
+		return transactionId;
+	}
+
+	public void setTransactionId(String transactionId) {
+		this.transactionId = transactionId;
 	}
 
 	public String getId() {
@@ -93,6 +92,22 @@ public class Payment {
 
 	public void setStatus(String status) {
 		this.status = status;
+	}
+
+	public Date getCretedDate() {
+		return cretedDate;
+	}
+
+	public void setCretedDate(Date cretedDate) {
+		this.cretedDate = cretedDate;
+	}
+
+	public Date getModifyDate() {
+		return modifyDate;
+	}
+
+	public void setModifyDate(Date modifyDate) {
+		this.modifyDate = modifyDate;
 	}
 
 }
