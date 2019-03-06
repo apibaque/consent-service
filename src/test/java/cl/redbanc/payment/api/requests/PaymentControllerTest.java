@@ -12,6 +12,7 @@ import cl.redbanc.payment.api.model.PaymentDTO;
 import cl.redbanc.payment.api.model.PaymentDTO.StatusEnum;
 
 import java.math.BigDecimal;
+import java.sql.Date;
 
 import javax.swing.plaf.basic.BasicInternalFrameTitlePane.MoveAction;
 
@@ -65,8 +66,8 @@ public class PaymentControllerTest {
      *
      * It tests response to be "Hello Java!"
      */
-    @Test
-    @Order(1)
+    //@Test
+    //@Order(1)
     public void paymentConsentJava() throws Exception {
     	
     	ObjectMapper obj = new ObjectMapper();
@@ -84,7 +85,7 @@ public class PaymentControllerTest {
 		debtorAccount.setName("SANTANDER");
 		
 		payment.setDebtorAccount(debtorAccount);
-    	payment.setId("3F2504E0-4F89-11D3-9A0C-0305E82C3303");
+    	payment.setId("3F2504E0-4F89-11D3-9A0C-0305E82C3305");
     	
     	InstructedAmountDTO instructedAmount = new InstructedAmountDTO();
     	instructedAmount.amount(BigDecimal.valueOf(500000));
@@ -92,6 +93,14 @@ public class PaymentControllerTest {
     	
 		payment.setInstructedAmount(instructedAmount);
     	payment.setStatus(StatusEnum.APPROVED);
+    	payment.setCreationDate(new java.util.Date());
+    	//payment.setModifyDate(new java.util.Date());
+    	
+    	
+    	
+    	payment.setTransactionId("898888");
+    	
+    	
     	
         
     	
@@ -111,7 +120,7 @@ public class PaymentControllerTest {
     @Order(4)
     public void paymentOrderByIdJava() throws Exception {
     	
-    	ObjectMapper obj = new ObjectMapper();
+    	/*ObjectMapper obj = new ObjectMapper();
     	PaymentDTO payment = new PaymentDTO(); 
     	CreditorAccountDTO creditorAccount = new CreditorAccountDTO();
     	creditorAccount.setDestinationDNI("76000000");
@@ -126,7 +135,7 @@ public class PaymentControllerTest {
 		debtorAccount.setName("SANTANDER");
 		
 		payment.setDebtorAccount(debtorAccount);
-    	payment.setId("3F2504E0-4F89-11D3-9A0C-0305E82C3303");
+    	payment.setId("3F2504E0-4F89-11D3-9A0C-0305E82C3304");
     	
     	InstructedAmountDTO instructedAmount = new InstructedAmountDTO();
     	instructedAmount.amount(BigDecimal.valueOf(500000));
@@ -135,9 +144,9 @@ public class PaymentControllerTest {
 		payment.setInstructedAmount(instructedAmount);
     	payment.setStatus(StatusEnum.APPROVED);
     	
-        
+        */
     	
-    	String response = mockMvc.perform(MockMvcRequestBuilders.get("/payments/3F2504E0-4F89-11D3-9A0C-0305E82C3303")
+    	String response = mockMvc.perform(MockMvcRequestBuilders.get("/payments/3F2504E0-4F89-11D3-9A0C-0305E82C3304")
     			.contentType(MediaType.APPLICATION_JSON))
             .andExpect(MockMvcResultMatchers.status().isOk())
             .andReturn()
@@ -154,29 +163,32 @@ public class PaymentControllerTest {
     	
     	ObjectMapper obj = new ObjectMapper();
     	PaymentDTO payment = new PaymentDTO(); 
-    	CreditorAccountDTO creditorAccount = new CreditorAccountDTO();
+    	/*CreditorAccountDTO creditorAccount = new CreditorAccountDTO();
     	creditorAccount.setDestinationDNI("76000000");
     	creditorAccount.setIdentification("00100");
     	creditorAccount.setName("SOPROLE -1");
     	
 		payment.setCreditorAccount(creditorAccount);
-    	
-		DebtorAccountDTO debtorAccount = new DebtorAccountDTO();
-		debtorAccount.setDestinationDNI("8000000");
+    	*/
+		/*DebtorAccountDTO debtorAccount = new DebtorAccountDTO();
+		debtorAccount.setDestinationDNI("8900000");
 		debtorAccount.setIdentification("03700");
-		debtorAccount.setName("SANTANDER");
+		debtorAccount.setName("SANTANDER -1");
 		
-		payment.setDebtorAccount(debtorAccount);
-    	payment.setId("3F2504E0-4F89-11D3-9A0C-0305E82C3303");
+		payment.setDebtorAccount(debtorAccount);*/
     	
-    	InstructedAmountDTO instructedAmount = new InstructedAmountDTO();
+    	payment.setId("3F2504E0-4F89-11D3-9A0C-0305E82C3305");
+    	
+    	payment.setTransactionId("128823821");
+    	/*InstructedAmountDTO instructedAmount = new InstructedAmountDTO();
     	instructedAmount.amount(BigDecimal.valueOf(500000));
     	instructedAmount.setCurrency(BigDecimal.valueOf(152));
     	
-		payment.setInstructedAmount(instructedAmount);
+		payment.setInstructedAmount(instructedAmount); */
+    	payment.setModificationDate(new java.util.Date());
     	payment.setStatus(StatusEnum.REJECTED);
     	
-        
+       
     	
     	String response = mockMvc.perform(MockMvcRequestBuilders.post("/payments/")
     			.contentType(MediaType.APPLICATION_JSON)
