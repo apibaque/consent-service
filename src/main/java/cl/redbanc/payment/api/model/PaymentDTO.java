@@ -1,5 +1,6 @@
 package cl.redbanc.payment.api.model;
 
+import java.util.Date;
 import java.util.Objects;
 
 import javax.validation.Valid;
@@ -28,6 +29,15 @@ public class PaymentDTO {
 	
 	@JsonProperty("id")
 	private String id = null;
+	
+	@JsonProperty("transactionId")
+	private String transactionId = null;
+	
+	@JsonProperty("createdDate")
+	private Date createdDate;
+	
+	@JsonProperty("modifyDate")
+	private Date modifyDate;
 	
 	@JsonProperty("debtorAccount")
 	private DebtorAccountDTO debtorAccount = null;
@@ -177,6 +187,30 @@ public class PaymentDTO {
 		this.id = id;
 	}
 
+	public String getTransactionId() {
+		return transactionId;
+	}
+
+	public void setTransactionId(String transactionId) {
+		this.transactionId = transactionId;
+	}
+
+	public Date getCreatedDate() {
+		return createdDate;
+	}
+
+	public void setCreatedDate(Date createdDate) {
+		this.createdDate = createdDate;
+	}
+
+	public Date getModifyDate() {
+		return modifyDate;
+	}
+
+	public void setModifyDate(Date modifyDate) {
+		this.modifyDate = modifyDate;
+	}
+
 	@Override
 	public boolean equals(java.lang.Object o) {
 		if (this == o) {
@@ -187,6 +221,9 @@ public class PaymentDTO {
 		}
 		PaymentDTO payment = (PaymentDTO) o;
 		return Objects.equals(this.id, payment.id)
+				&& Objects.equals(this.transactionId, payment.transactionId)
+				&& Objects.equals(this.createdDate, payment.createdDate)
+				&& Objects.equals(this.modifyDate, payment.modifyDate)
 				&& Objects.equals(this.debtorAccount, payment.debtorAccount)
 				&& Objects.equals(this.creditorAccount, payment.creditorAccount)
 				&& Objects.equals(this.instructedAmount, payment.instructedAmount)
@@ -204,6 +241,9 @@ public class PaymentDTO {
 		sb.append("class Payment {\n");
 
 		sb.append("    id: ").append(toIndentedString(id)).append("\n");
+		sb.append("    transactionId: ").append(toIndentedString(transactionId)).append("\n");
+		sb.append("    createdDate: ").append(toIndentedString(createdDate)).append("\n");
+		sb.append("    modifyDate: ").append(toIndentedString(modifyDate)).append("\n");
 		sb.append("    debtorAccount: ").append(toIndentedString(debtorAccount)).append("\n");
 		sb.append("    creditorAccount: ").append(toIndentedString(creditorAccount)).append("\n");
 		sb.append("    instructedAmount: ").append(toIndentedString(instructedAmount)).append("\n");
