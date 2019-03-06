@@ -23,9 +23,9 @@ public class Payment {
 	@Field("status")
 	private String status;
 
-	private Date cretedDate;
+	private Date creationDate;
 
-	private Date modifyDate;
+	private Date modificationDate;
 
 	@NotEmpty(message = "debtorAccount can not be empty")
 	private DebtorAccount debtorAccount = null;
@@ -37,10 +37,14 @@ public class Payment {
 	private InstructedAmount instructedAmount = null;
 
 	@PersistenceConstructor
-	public Payment(String status, DebtorAccount debtorAccount, CreditorAccount creditorAccount,
-			InstructedAmount instructedAmount) {
+	public Payment(String id, String transactionId, String status, Date creationDate, Date modificationDate,
+			DebtorAccount debtorAccount, CreditorAccount creditorAccount, InstructedAmount instructedAmount) {
 		super();
+		this.id = id;
+		this.transactionId = transactionId;
 		this.status = status;
+		this.creationDate = creationDate;
+		this.modificationDate = modificationDate;
 		this.debtorAccount = debtorAccount;
 		this.creditorAccount = creditorAccount;
 		this.instructedAmount = instructedAmount;
@@ -94,20 +98,20 @@ public class Payment {
 		this.status = status;
 	}
 
-	public Date getCretedDate() {
-		return cretedDate;
+	public Date getCreationDate() {
+		return creationDate;
 	}
 
-	public void setCretedDate(Date cretedDate) {
-		this.cretedDate = cretedDate;
+	public void setCreationDate(Date creationDate) {
+		this.creationDate = creationDate;
 	}
 
-	public Date getModifyDate() {
-		return modifyDate;
+	public Date getModificationDate() {
+		return modificationDate;
 	}
 
-	public void setModifyDate(Date modifyDate) {
-		this.modifyDate = modifyDate;
+	public void setModificationDate(Date modificationDate) {
+		this.modificationDate = modificationDate;
 	}
 
 }
