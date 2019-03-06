@@ -33,11 +33,11 @@ public class PaymentDTO {
 	@JsonProperty("transactionId")
 	private String transactionId = null;
 	
-	@JsonProperty("createdDate")
-	private Date createdDate;
+	@JsonProperty("creationDate")
+	private Date creationDate;
 	
-	@JsonProperty("modifyDate")
-	private Date modifyDate;
+	@JsonProperty("modificationDate")
+	private Date modificationDate;
 	
 	@JsonProperty("debtorAccount")
 	private DebtorAccountDTO debtorAccount = null;
@@ -84,8 +84,8 @@ public class PaymentDTO {
 
 	public PaymentDTO build(Payment payment) {
 		this.setId(payment.getId());
-		this.setCreatedDate(payment.getCretedDate());
-		this.setModifyDate(payment.getModifyDate());
+		this.setCreationDate(payment.getCreationDate());
+		this.setModificationDate(payment.getModificationDate());
 		this.setCreditorAccount(new CreditorAccountDTO().build(payment.getCreditorAccount()));
 		this.setDebtorAccount(new DebtorAccountDTO().build(payment.getDebtorAccount()));
 		this.setInstructedAmount(new InstructedAmountDTO().build(payment.getInstructedAmount()));
@@ -197,20 +197,20 @@ public class PaymentDTO {
 		this.transactionId = transactionId;
 	}
 
-	public Date getCreatedDate() {
-		return createdDate;
+	public Date getCreationDate() {
+		return creationDate;
 	}
 
-	public void setCreatedDate(Date createdDate) {
-		this.createdDate = createdDate;
+	public void setCreationDate(Date creationDate) {
+		this.creationDate = creationDate;
 	}
 
-	public Date getModifyDate() {
-		return modifyDate;
+	public Date getModificationDate() {
+		return modificationDate;
 	}
 
-	public void setModifyDate(Date modifyDate) {
-		this.modifyDate = modifyDate;
+	public void setModificationDate(Date modificationDate) {
+		this.modificationDate = modificationDate;
 	}
 
 	@Override
@@ -224,8 +224,8 @@ public class PaymentDTO {
 		PaymentDTO payment = (PaymentDTO) o;
 		return Objects.equals(this.id, payment.id)
 				&& Objects.equals(this.transactionId, payment.transactionId)
-				&& Objects.equals(this.createdDate, payment.createdDate)
-				&& Objects.equals(this.modifyDate, payment.modifyDate)
+				&& Objects.equals(this.creationDate, payment.creationDate)
+				&& Objects.equals(this.modificationDate, payment.modificationDate)
 				&& Objects.equals(this.debtorAccount, payment.debtorAccount)
 				&& Objects.equals(this.creditorAccount, payment.creditorAccount)
 				&& Objects.equals(this.instructedAmount, payment.instructedAmount)
@@ -244,8 +244,8 @@ public class PaymentDTO {
 
 		sb.append("    id: ").append(toIndentedString(id)).append("\n");
 		sb.append("    transactionId: ").append(toIndentedString(transactionId)).append("\n");
-		sb.append("    createdDate: ").append(toIndentedString(createdDate)).append("\n");
-		sb.append("    modifyDate: ").append(toIndentedString(modifyDate)).append("\n");
+		sb.append("    createdDate: ").append(toIndentedString(creationDate)).append("\n");
+		sb.append("    modifyDate: ").append(toIndentedString(modificationDate)).append("\n");
 		sb.append("    debtorAccount: ").append(toIndentedString(debtorAccount)).append("\n");
 		sb.append("    creditorAccount: ").append(toIndentedString(creditorAccount)).append("\n");
 		sb.append("    instructedAmount: ").append(toIndentedString(instructedAmount)).append("\n");
